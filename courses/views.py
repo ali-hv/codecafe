@@ -24,6 +24,6 @@ def register_course(request, course_id):
     if request.user.is_authenticated:
         course_user_field = get_object_or_404(Course, id=course_id)
         course_user_field.users.add(request.user)
-        return redirect('courses:course_detail', course_id=course_id)
+        return redirect('courses:course_detail', course_slug=course_user_field.slug)
     else:
         return redirect('home:register')
