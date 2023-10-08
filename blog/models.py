@@ -16,7 +16,7 @@ class Author(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=250, verbose_name='Article Title')
-    slug = models.SlugField(unique=True, max_length=255, allow_unicode=True)
+    slug = models.SlugField(unique=True, max_length=255, allow_unicode=True, default='article-slug')
     detail = models.TextField(verbose_name='Article Detail')
     image = models.ImageField(upload_to='photos/articles/%Y-%m-%d/', verbose_name='Article Detail')
     created_date = models.DateTimeField(auto_now_add=True)
