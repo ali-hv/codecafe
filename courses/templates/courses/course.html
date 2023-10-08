@@ -1,0 +1,64 @@
+{% extends 'home/base.html' %}
+
+{% block title %}{{ course.title }}{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="course-details" style="background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <!-- Course Title -->
+                <h1 class="display-4">{{ course.title }}</h1>
+
+                <!-- Course Price -->
+                {% if course.price == None %}
+                    <p class="h3 text-success">رایگان</p>
+                {% else %}
+                    <p class="h3 text-success">{{ course.price }} تومان </p>
+                {% endif %}
+
+                <!-- Register Course Button -->
+                {% if access %}
+                    <button class="btn btn-primary btn-lg btn-block">شما به این دوره دسترسی دارید</button>
+                {% else %}
+                    <a href="{% url 'courses:register_course' course.id %}" class="btn btn-primary btn-lg btn-block">ثبت نام</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+            <!-- Course Image -->
+            <img src="{{ course.image.url }}" alt="Course Image" class="img-fluid rounded">
+        </div>
+    </div>
+
+    <!-- Additional Course Details -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2>توضیحات دوره</h2>
+            <p>{{ course.detail }}</p>
+        </div>
+    </div>
+
+    <!-- Course Videos List -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2>ویدئو ها</h2>
+            <ul class="list-group" style="border-radius: 20px;">
+                {% for video in course.videos.all %}
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {% if access%}
+                        <a href="http://127.0.0.1:8000/media/{{ video.video }}">{{ video.title }}</a>
+                        <i class="fa fa-unlock"></i>
+                    {% else %}
+                        <p>{{ video.title }}</p>
+                        <i class="fa fa-lock"></i>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

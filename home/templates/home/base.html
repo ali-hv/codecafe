@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title%}</title>
+    {% include 'home/base_ref.html' %}
+</head>
+
+<body>
+    {% include 'home/header.html' %}
+
+    {% block content %}{%  endblock content %}
+
+    {% include 'home/footer.html' %}
+
+    <!-- JavaScript Libraries -->
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'css/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/easing.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>

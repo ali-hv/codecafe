@@ -1,0 +1,127 @@
+body {
+  background-color: #131325;
+  direction: rtl;
+}
+
+.flex-row {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-flow: column;
+}
+
+.center {
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.list {
+  border-radius: 3px;
+  overflow: hidden;
+}
+.list .card {
+  cursor: pointer;
+  min-width: 700px;
+  margin-bottom: 10px;
+  perspective: 600px;
+  transition: all 0.1s;
+  background-color: #212140;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  height: 90px;
+}
+.list .card .bottom {
+  height: 0px;
+  overflow: hidden;
+  width: 200px;
+  font-size: 12px;
+  color: #777;
+  text-align: justify;
+  font-weight: normal;
+}
+.list .card.open {
+  padding: 30px;
+  height: auto;
+}
+.list .card.open .bottom {
+  margin-top: 10px;
+  height: 100%;
+  overflow: visible;
+}
+.list .card.open .book {
+  transform: rotateY(-50deg);
+  box-shadow: 10px -10px 10px 2px rgba(0, 0, 0, 0.2), -2px 0px 0px 0px #888;
+  transition: all 0.5s;
+  transition-delay: 0.05s;
+}
+.list .card.open .info {
+  transform: translate(0, -10px);
+}
+.list .card.open .members {
+  padding: 15px 20px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+.list .card button.simple {
+  cursor: pointer;
+  color: #CCC;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: #1ea94b;
+  padding: 15px 20px;
+  font-family: Shabnam, "Montserrat";
+  font-weight: bold;
+  transition: all 0.1s;
+}
+.list .card button.simple:hover {
+  box-shadow: 0px 15px 20px -5px rgba(0, 0, 0, 0.3);
+  transform: translate(0, 2px);
+}
+.list .card .book {
+  transition: all 0.5s;
+  width: 120px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.list .card .info {
+  transition: all 0.2s;
+  min-width: 200px;
+  padding: 0px 30px;
+  font-family: "shabnam", "Montserrat";
+  font-weight: bold;
+}
+.list .card .info .title {
+  font-size: 1em;
+  color: #FFF;
+}
+.list .card .info .author {
+  font-size: 12px;
+  font-weight: normal;
+  color: #888;
+}
+.list .card .group {
+  margin-right: auto;
+}
+.list .card .members {
+  transition: all 0.1s;
+  padding: 40px;
+  font-family: "shabnam", "Montserrat";
+  color: #CCC;
+  background-color: #1c1c36;
+}
+.list .card .members .current {
+  font-weight: bold;
+  margin-left: 10px;
+}
+.list .card .members .max {
+  opacity: 0.5;
+  margin-right: 10px;
+}
