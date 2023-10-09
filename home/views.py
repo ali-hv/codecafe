@@ -6,8 +6,8 @@ from courses.models import Course
 
 
 def home_page(request):
-    popular_courses = Course.objects.annotate(count=Count('users')).order_by('-count')[:3]
-    return render(request, 'home/index.html', {'popular_courses': popular_courses})
+    courses = Course.objects.annotate(count=Count('users')).order_by('-count')[:3]
+    return render(request, 'home/index.html', {'courses': courses})
 
 
 def about_page(request):

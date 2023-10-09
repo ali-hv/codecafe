@@ -13,12 +13,15 @@
                 <h1 class="display-4">{{ course.title }}</h1>
 
                 <!-- Course Price -->
-                {% if course.price == None %}
+                {% if course.price == 0 %}
                     <p class="h3 text-success">رایگان</p>
                 {% else %}
                     <p class="h3 text-success">{{ course.price }} تومان </p>
                 {% endif %}
-                    <p class="h3 text-secondary"> زمان دوره: {{ duration }} ساعت</p>
+
+                <!-- Course Duration -->
+                <p class="h3 text-secondary"> زمان دوره: {{ duration }} ساعت</p>
+
                 <!-- Register Course Button -->
                 {% if access %}
                     <button class="btn btn-primary btn-lg btn-block">شما به این دوره دسترسی دارید</button>
