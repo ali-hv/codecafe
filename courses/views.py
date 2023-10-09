@@ -26,4 +26,4 @@ def register_course(request, course_id):
         course_user_field.users.add(request.user)
         return redirect('courses:course_detail', course_slug=course_user_field.slug)
     else:
-        return redirect('home:register')
+        return redirect('login')
