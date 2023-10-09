@@ -165,17 +165,18 @@
                 <h1 class="mb-5">محبوب ترین دوره ها</h1>
             </div>
             <div class="row g-4 justify-content-center">
+                {% for course in popular_courses %}
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light" style="border-radius: 30px">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{% static 'img/course-1.jpg' %}" alt="" style="border-radius: 30px 30px 0 0">
+                            <img class="img-fluid" src="{{ course.image.url }}" alt="" style="border-radius: 30px 30px 0 0">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius:0 30px 30px 0;">اطلاعات بیشتر</a>
+                                <a href="{% url 'courses:course_detail' course_slug=course.slug %}" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius:0 30px 30px 0;">اطلاعات بیشتر</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 0 0 30px;">ثبت نام</a>
                             </div>
                         </div>
                         <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">طراحی وب برای مبتدیان</h3>
+                            <h3 class="mb-0">{{ course.title }}</h3>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -184,71 +185,21 @@
                                 <small class="fa fa-star text-primary"></small>
                                 <small>(123)</small>
                             </div>
+                            {% if course.price == None %}
                             <h5 class="mb-4">رایگان</h5>
+                            {% else %}
+                            <h5 class="mb-4">{{ course.price }} تومان </h5>
+                            {% endif %}
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i> علی حسین وردی</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i> 22 ساعت</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i> 34 دانش آموز</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>
+                                {{ course.teacher.get_full_name }}</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>
+                                {{ course.users.all|length }}</small>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="course-item bg-light" style="border-radius: 30px">
-                        <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{% static 'img/course-2.jpg' %}" alt=""  style="border-radius: 30px 30px 0 0">
-                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius:0 30px 30px 0;">اطلاعات بیشتر</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 0 0 30px;">ثبت نام</a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">گیت هاب برای مبتدیان</h3>
-                            <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small>(123)</small>
-                            </div>
-                            <h5 class="mb-4">رایگان</h5>
-                        </div>
-                        <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i> علی حسین وردی</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i> 22 ساعت</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i> 34 دانش آموز</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="course-item bg-light" style="border-radius: 30px">
-                        <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{% static 'img/course-3.jpg' %}" alt="" style="border-radius: 30px 30px 0 0">
-                            <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius:0 30px 30px 0;">اطلاعات بیشتر</a>
-                                <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 30px 0 0 30px;">ثبت نام</a>
-                            </div>
-                        </div>
-                        <div class="text-center p-4 pb-0">
-                            <h3 class="mb-0">پایتون پیشرفته</h3>
-                            <div class="mb-3">
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star text-primary"></small>
-                                <small>(123)</small>
-                            </div>
-                            <h5 class="mb-4">200,000 تومان</h5>
-                        </div>
-                        <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i> علی حسین وردی</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i> 22 ساعت</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i> 34 دانش آموز</small>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

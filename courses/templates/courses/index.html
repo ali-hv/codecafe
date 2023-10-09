@@ -35,8 +35,8 @@
                 <div class="d-flex border-top">
                     <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>
                         {{ course.teacher.get_full_name }}</small>
-                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i> 22 ساعت</small>
-                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i> 34 دانش آموز</small>
+                    <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>
+                        {{ course.users.all|length }}</small>
                 </div>
             </div>
         </div>

@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.db.models import Count
+from courses.models import Course
 
 
 def home_page(request):
-    return render(request, 'home/index.html')
+    popular_courses = Course.objects.annotate(count=Count('users')).order_by('-count')[:3]
+    return render(request, 'home/index.html', {'popular_courses': popular_courses})
 
 
 def about_page(request):
