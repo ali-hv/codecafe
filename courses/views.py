@@ -11,11 +11,13 @@ def courses_list(request):
 
 def course_detail(request, course_slug):
     course = get_object_or_404(Course, slug=course_slug)
+    course_duration = sum(video.duration for video in course.videos.all())
+    course_duration = int(course_duration / 60)
 
     if request.user not in course.users.all():
-        context = {'course': course, 'access': False}
+        context = {'course': course, 'duration': course_duration, 'access': False}
     else:
-        context = {'course': course, 'access': True}
+        context = {'course': course, 'duration': course_duration, 'access': True}
 
     return render(request, 'courses/course.html', context=context)
 
