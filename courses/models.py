@@ -29,6 +29,7 @@ class Video(models.Model):
     video = models.FileField(upload_to='videos/courses/%Y-%m-%d/', verbose_name='Video File')  # TODO add file validator
     uploaded_date = models.DateTimeField(auto_now=True)
     sequence_number = models.PositiveIntegerField()
+    duration = models.PositiveIntegerField()
     course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name="video_course") # Just for easier managing
 
     def __str__(self):
