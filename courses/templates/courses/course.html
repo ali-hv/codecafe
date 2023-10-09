@@ -1,26 +1,87 @@
 {% extends 'home/base.html' %}
+{% load jalali_tags %}
 
 {% block title %}{{ course.title }}{% endblock title %}
 
 {% block content %}
 <div class="container mt-5">
+    <!-- Course Title -->
+    <h1 class="title text-center" style="margin: 80px; font-size: 50px">{{ course.title }}</h1>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8 mb-4">
+            <!-- Course Image -->
+            <img src="{{ course.image.url }}" alt="Course Image" class="img-fluid rounded">
+        </div>
+
+        <div class="col-lg-4">
             <div class="course-details" style="background-color: #fff;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <!-- Course Title -->
-                <h1 class="display-4">{{ course.title }}</h1>
+                <div>
+                    <span><i class="fa fa-money-bill-wave" style="margin: 10px"></i>قیمت</span>
+                    <span>
+                        <!-- Course Price -->
+                        {% if course.price == 0 %}
+                            <span style="color: green; font-size: 30px; margin-right: 180px">رایگان</span>
+                        {% else %}
+                            <span style="color: green; font-size: 30px; margin-right: 180px">{{ course.price }} تومان </span>
+                        {% endif %}
+                    </span>
+                </div>
+                <hr>
 
-                <!-- Course Price -->
-                {% if course.price == 0 %}
-                    <p class="h3 text-success">رایگان</p>
-                {% else %}
-                    <p class="h3 text-success">{{ course.price }} تومان </p>
-                {% endif %}
+                <div>
+                    <span><i class="fa fa-clock" style="margin: 10px"></i>طول دوره</span>
+                    <span>
+                        <!-- Course Duration -->
+                        <span style="color: gray; font-size: 20px; margin-right: 180px">{{ duration }} ساعت</span>
+                    </span>
+                </div>
+                <hr>
 
-                <!-- Course Duration -->
-                <p class="h3 text-secondary"> زمان دوره: {{ duration }} ساعت</p>
+                <div>
+                    <span><i class="fa fa-clock" style="margin: 10px"></i>تاریخ شروع دوره</span>
+                    <span>
+                        <!-- Course Duration -->
+                        <span style="color: gray; font-size: 20px; margin-right: 100px">
+                            {{ course.created_date|to_jalali:'%y/%m/%d' }}
+                        </span>
+                    </span>
+                </div>
+                <hr>
+
+                <div>
+                    <span><i class="fa fa-clock" style="margin: 10px"></i>آخرین آپدیت دوره</span>
+                    <span>
+                        <!-- Course Duration -->
+                        <span style="color: gray; font-size: 20px; margin-right: 100px">
+                            {{ course.updated_date|to_jalali:'%y/%m/%d' }}
+                        </span>
+                    </span>
+                </div>
+                <hr>
+
+                <div>
+                    <span><i class="fa fa-clock" style="margin: 10px"></i>مدرس دوره</span>
+                    <span>
+                        <!-- Course Duration -->
+                        <span style="color: gray; font-size: 20px; margin-right: 100px">{{ course.teacher.get_full_name }}</span>
+                    </span>
+                </div>
+                <hr>
+
+                <div>
+                    <span><i class="fa fa-clock" style="margin: 10px"></i>وضعیت دوره</span>
+                    <span>
+                        <!-- Course Duration -->
+                        {% if course.status == 'going' %}
+                            <span style="color: gray; font-size: 20px; margin-right: 100px">درحال برگزاری</span>
+                        {% else %}
+                            <span style="color: gray; font-size: 20px; margin-right: 100px">به اتمام رسیده</span>
+                        {% endif %}
+                    </span>
+                </div>
+                <hr></br>
 
                 <!-- Register Course Button -->
                 {% if access %}
@@ -29,10 +90,6 @@
                     <a href="{% url 'courses:register_course' course.id %}" class="btn btn-primary btn-lg btn-block">ثبت نام</a>
                 {% endif %}
             </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <!-- Course Image -->
-            <img src="{{ course.image.url }}" alt="Course Image" class="img-fluid rounded">
         </div>
     </div>
 
