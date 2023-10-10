@@ -41,7 +41,7 @@
                     <span>
                         <!-- Course Duration -->
                         <span class="course-details-info">
-                            {{ course.created_date|to_jalali:'%y/%m/%d' }}
+                            {{ course.created_date|to_jalali:'%Y/%m/%d' }}
                         </span>
                     </span>
                 </div>
@@ -51,7 +51,7 @@
                     <span>
                         <!-- Course Duration -->
                         <span class="course-details-info">
-                            {{ course.updated_date|to_jalali:'%y/%m/%d' }}
+                            {{ course.updated_date|to_jalali:'%Y/%m/%d' }}
                         </span>
                     </span>
                 </div>
@@ -79,7 +79,7 @@
 
                 <!-- Register Course Button -->
                 {% if access %}
-                    <button class="btn btn-primary btn-lg btn-block">شما به این دوره دسترسی دارید</button>
+                    <button class="btn btn-primary btn-lg btn-block" style="width: 100%">شما به این دوره دسترسی دارید</button>
                 {% else %}
                     <a href="{% url 'courses:register_course' course.id %}" class="btn btn-primary btn-lg btn-block" style="width: 100%">ثبت نام</a>
                 {% endif %}
