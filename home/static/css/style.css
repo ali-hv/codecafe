@@ -556,3 +556,30 @@ input#search-input {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+/* course details start */
+
+.course-details {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.course-details-icon {
+    margin: 10px;
+}
+
+.course-details-price {
+    color: green;
+    font-size: 30px;
+    display: block;
+    text-align: left;
+}
+
+.course-details-info {
+    color: gray;
+    font-size: 20px;
+    display: block;
+    text-align: left;
+}
+
+/* course details end */

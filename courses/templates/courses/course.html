@@ -14,80 +14,74 @@
         </div>
 
         <div class="col-lg-4">
-            <div class="course-details" style="background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            <div class="course-details">
                 <div>
-                    <span><i class="fa fa-money-bill-wave" style="margin: 10px"></i>قیمت</span>
+                    <span><i class="fa fa-money-bill-wave course-details-icon"></i>قیمت</span>
                     <span>
                         <!-- Course Price -->
                         {% if course.price == 0 %}
-                            <span style="color: green; font-size: 30px; margin-right: 180px">رایگان</span>
+                            <span class="course-details-price">رایگان</span>
                         {% else %}
-                            <span style="color: green; font-size: 30px; margin-right: 180px">{{ course.price }} تومان </span>
+                            <span class="course-details-price">{{ course.price }} تومان </span>
                         {% endif %}
                     </span>
                 </div>
-                <hr>
 
                 <div>
-                    <span><i class="fa fa-clock" style="margin: 10px"></i>طول دوره</span>
+                    <span><i class="fa fa-clock course-details-icon"></i>طول دوره</span>
                     <span>
                         <!-- Course Duration -->
-                        <span style="color: gray; font-size: 20px; margin-right: 180px">{{ duration }} ساعت</span>
+                        <span class="course-details-info">{{ duration }} ساعت</span>
                     </span>
                 </div>
-                <hr>
+
 
                 <div>
-                    <span><i class="fa fa-clock" style="margin: 10px"></i>تاریخ شروع دوره</span>
+                    <span><i class="fa fa-clock course-details-icon"></i>تاریخ شروع دوره</span>
                     <span>
                         <!-- Course Duration -->
-                        <span style="color: gray; font-size: 20px; margin-right: 100px">
+                        <span class="course-details-info">
                             {{ course.created_date|to_jalali:'%y/%m/%d' }}
                         </span>
                     </span>
                 </div>
-                <hr>
 
                 <div>
-                    <span><i class="fa fa-clock" style="margin: 10px"></i>آخرین آپدیت دوره</span>
+                    <span><i class="fa fa-clock course-details-icon"></i>آخرین آپدیت دوره</span>
                     <span>
                         <!-- Course Duration -->
-                        <span style="color: gray; font-size: 20px; margin-right: 100px">
+                        <span class="course-details-info">
                             {{ course.updated_date|to_jalali:'%y/%m/%d' }}
                         </span>
                     </span>
                 </div>
-                <hr>
 
                 <div>
-                    <span><i class="fa fa-clock" style="margin: 10px"></i>مدرس دوره</span>
+                    <span><i class="fa fa-clock course-details-icon"></i>مدرس دوره</span>
                     <span>
                         <!-- Course Duration -->
-                        <span style="color: gray; font-size: 20px; margin-right: 100px">{{ course.teacher.get_full_name }}</span>
+                        <span class="course-details-info">{{ course.teacher.get_full_name }}</span>
                     </span>
                 </div>
-                <hr>
 
                 <div>
-                    <span><i class="fa fa-clock" style="margin: 10px"></i>وضعیت دوره</span>
+                    <span><i class="fa fa-clock course-details-icon"></i>وضعیت دوره</span>
                     <span>
                         <!-- Course Duration -->
                         {% if course.status == 'going' %}
-                            <span style="color: gray; font-size: 20px; margin-right: 100px">درحال برگزاری</span>
+                            <span class="course-details-info">درحال برگزاری</span>
                         {% else %}
-                            <span style="color: gray; font-size: 20px; margin-right: 100px">به اتمام رسیده</span>
+                            <span class="course-details-info">به اتمام رسیده</span>
                         {% endif %}
                     </span>
                 </div>
-                <hr></br>
+                <hr>
 
                 <!-- Register Course Button -->
                 {% if access %}
                     <button class="btn btn-primary btn-lg btn-block">شما به این دوره دسترسی دارید</button>
                 {% else %}
-                    <a href="{% url 'courses:register_course' course.id %}" class="btn btn-primary btn-lg btn-block">ثبت نام</a>
+                    <a href="{% url 'courses:register_course' course.id %}" class="btn btn-primary btn-lg btn-block" style="width: 100%">ثبت نام</a>
                 {% endif %}
             </div>
         </div>
