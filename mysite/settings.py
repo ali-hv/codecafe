@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # TODO False
+DEBUG = config("DEBUG") == "true"  # TODO False
 
 ALLOWED_HOSTS = ["*"]  # TODO codcafe.ir
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
     'jalali_date',
+    'captcha',
     
     'home',
     'blog',
