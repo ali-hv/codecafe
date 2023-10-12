@@ -46,12 +46,12 @@
                 <div class="dropdown-content">
                   <a href="{% url 'users:user_profile' %}"><i class="bi bi-person" style="margin-left: 8px"></i>پروفایل</a>
                   <a href="{% url 'users:user_courses' %}"><i class="bi bi-folder2" style="margin-left: 8px"></i>دوره های من</a>
-                  <a href="{% url 'logout' %}" class="logout"><i class="bi bi-door-open" style="margin-left: 8px"></i>خروج</a>
+                  <a href="{% url 'accounts:logout' %}" class="logout"><i class="bi bi-door-open" style="margin-left: 8px"></i>خروج</a>
                 </div>
               </div>
             {% else %}
-              <a href="{% url 'login' %}"><button class="button login-button">ورود</button></a>
-              <a href="{% url 'home:register' %}"><button class="button register-button">ثبت نام</button></a>
+              <a href="{% url 'accounts:login' %}"><button class="button login-button">ورود</button></a>
+              <a href="{% url 'accounts:register' %}"><button class="button register-button">ثبت نام</button></a>
             {% endif %}
         </div>
     </div>

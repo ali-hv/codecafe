@@ -1,5 +1,4 @@
 {% load static %}
-{% load widget_tweaks %}
 
 <!doctype html>
 <html lang="en">
@@ -22,38 +21,44 @@
 <div class="row justify-content-center">
 <div class="col-md-6 col-lg-4">
 <div class="login-wrap p-0">
-<a href="{% url 'home:register' %}"><h3 class="mb-4 text-center">حساب کاربری ندارید؟</h3></a>
+<a href="{% url 'accounts:register' %}"><h3 class="mb-4 text-center">حساب کاربری ندارید؟</h3></a>
 <form method="post" class="signin-form">
     {% csrf_token %}
-    {% if form.errors %}
-    <h6 class="mb-4 text-center badge-danger" style="border-radius: 15px; padding: 5px">نام کاربری و رمز عبور صحیح نیستند. لطفا دوباره امتحان کنید</h6>
-    {% endif %}
-<div class="form-group">
-    {{form.username|add_class:"form-control"|attr:"placeholder:نام کاربری"}}
-    {{ form.username.error }}
-</div>
-<div class="form-group">
-    {{form.password|add_class:"form-control"|attr:"placeholder:رمز عبور"}}
-    {{ form.username.error }}
-</div>
-<div class="form-group">
-    {{ form.captcha }}
-</div>
-<div class="form-group">
-<button type="submit" class="form-control btn btn-primary submit px-3">ورود</button>
-</div>
-<div class="form-group d-md-flex">
 
+    {% if login_form.errors %}
+        {% for error in login_form.errors %}
+            <h6 class="mb-4 text-center badge-danger" style="border-radius: 15px; padding: 5px">{{ error }}</h6>
+        {%  endfor %}
+    {% endif %}
+
+<div class="form-group">
+    {{ login_form.username }}
+</div>
+
+<div class="form-group">
+    {{login_form.password }}
+</div>
+
+<div class="form-group">
+    {{ login_form.captcha }}
+</div>
+
+<div class="form-group">
+    <button type="submit" class="form-control btn btn-primary submit px-3">ورود</button>
+</div>
+
+<div class="form-group d-md-flex">
 <div class="">
-<a href="{% url 'password_reset' %}" class="btn btn-secondary" style="color: #fff">فراموشی رمز عبور</a>
+    <a href="{% url 'accounts:password_reset' %}" class="btn btn-secondary" style="color: #fff">فراموشی رمز عبور</a>
 </div>
 </div>
+
 </form>
 </div>
 </div>
 </div>
 </div>
 </section>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"80fd3b5ab9b85b5c","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.8.0","si":100}' crossorigin="anonymous"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8b253dfea2ab4077af8c6f58422dfbfd1689876627854" integrity="sha512-bjgnUKX4azu3dLTVtie9u6TKqgx29RBwfj3QXYt5EKfWM/9hPSAI/4qcV5NACjwAo8UtTeWefx6Zq5PHcMm7Tg==" data-cf-beacon='{"rayId":"80fd3b5ab9b85b5c","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.8.0","si":100}' crossorigin="anonymous"></script>
 </body>
 </html>
