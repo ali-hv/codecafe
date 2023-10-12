@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from decouple import config
 from pathlib import Path
 import os
 
@@ -21,10 +20,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-SECRET_KEY = config("SECRET_KEY")
+if "SECRET_KEY" in os.environ:
+    SECRET_KEY = os.environ["SECRET_KEY"]
+
+try:
+    SECRET_KEY
+except NameError:
+    SECRET_KEY = 'secret'
+
+if not SECRET_KEY:
+    SECRET_KEY = 'secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG") == "true"  # TODO False
+if "DEBUG" in os.environ:
+    DEBUG = os.environ["DEBUG"].lower() in ['true', 1]  # TODO False
 
 ALLOWED_HOSTS = ["*"]  # TODO codcafe.ir
 
@@ -147,5 +156,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Google Recaptcha Configs
-RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+if "RECAPTCHA_PUBLIC_KEY" in os.environ:
+    RECAPTCHA_PUBLIC_KEY = os.environ["RECAPTCHA_PUBLIC_KEY"]
+
+if "RECAPTCHA_PRIVATE_KEY" in os.environ:
+    RECAPTCHA_PRIVATE_KEY = os.environ["RECAPTCHA_PRIVATE_KEY"]
