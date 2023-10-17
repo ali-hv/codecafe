@@ -20,22 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-if "SECRET_KEY" in os.environ:
-    SECRET_KEY = os.environ["SECRET_KEY"]
 
-try:
-    SECRET_KEY
-except NameError:
-    SECRET_KEY = 'secret'
+SECRET_KEY = 'secret'  # It will automatically change when pushing to the server
 
-if not SECRET_KEY:
-    SECRET_KEY = 'secret'
+DEBUG = True  # It will automatically change when pushing to the server
 
-# SECURITY WARNING: don't run with debug turned on in production!
-if "DEBUG" in os.environ:
-    DEBUG = os.environ["DEBUG"].lower() in ['true', 1]  # TODO False
-
-ALLOWED_HOSTS = ["*"]  # TODO codcafe.ir
+ALLOWED_HOSTS = ["*"]
 
 LOGIN_REDIRECT_URL = 'home:home_page'
 LOGOUT_REDIRECT_URL = 'home:home_page'
