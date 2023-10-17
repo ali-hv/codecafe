@@ -29,3 +29,11 @@ def register_course(request, course_id):
         return redirect('courses:course_detail', course_slug=course_user_field.slug)
     else:
         return redirect('accounts:login')
+
+
+def search_courses(request, keyword):
+    keyword = request.GET.get('q')
+    courses = Course.objects.filter(title__contains=keyword)
+    context = {'courses': courses}
+
+    return render(request, 'courses/index.html', context=context)

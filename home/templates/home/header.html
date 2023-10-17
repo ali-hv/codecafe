@@ -30,8 +30,8 @@
         </div>
 
         <!-- Search Box Start -->
-        <form class="input-group rounded" action="{% url 'courses:courses_list' %}" method="get">
-          <input type="search" name="search" class="form-control" id="search-input" placeholder="جستجو" aria-label="Search" aria-describedby="search-addon"/>
+        <form class="input-group rounded" action="{% url 'courses:search_courses' keyword=q %}" method="get">
+          <input type="search" name="q" class="form-control" id="search-input" placeholder="جستجو" aria-label="Search" aria-describedby="search-addon"/>
           <button type="submit" class="input-group-text border-0" id="search-addon">
             <i class="fas fa-search"></i>
           </button>
