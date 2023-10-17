@@ -1,6 +1,7 @@
 from django.db import models
+from mysite.models import TimeStampedModel
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator
 
 
 class Teacher(models.Model):
@@ -36,7 +37,7 @@ class Video(models.Model):
         return self.title
 
 
-class Course(models.Model):
+class Course(TimeStampedModel):
     STATUS_CHOICES = (('going', 'Going On'), ('done', 'Done'))
 
     title = models.CharField(max_length=250, blank=False)
@@ -45,8 +46,6 @@ class Course(models.Model):
     image = models.ImageField(upload_to='photos/courses/%Y-%m-%d/')
     price = models.PositiveIntegerField(default=0)
     discount = models.PositiveIntegerField(validators=[MaxValueValidator(100)], default=0)
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=8, default='Going On', choices=STATUS_CHOICES)
     is_published = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')

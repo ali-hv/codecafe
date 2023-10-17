@@ -1,4 +1,5 @@
 from django.db import models
+from mysite.models import TimeStampedModel
 from django.contrib.auth.models import User
 from courses.models import Category
 
@@ -14,13 +15,11 @@ class Author(models.Model):
         return f'{self.user.first_name} {self.user.last_name}'
 
 
-class Article(models.Model):
+class Article(TimeStampedModel):
     title = models.CharField(max_length=250, verbose_name='Article Title')
     slug = models.SlugField(unique=True, max_length=255, allow_unicode=True, default='article-slug')
     detail = models.TextField(verbose_name='Article Detail')
     image = models.ImageField(upload_to='photos/articles/%Y-%m-%d/', verbose_name='Article Detail')
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Article Category')
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Article Author')
