@@ -28,4 +28,4 @@ def register_course(request, course_id):
         course_user_field.users.add(request.user)
         return redirect('courses:course_detail', course_slug=course_user_field.slug)
     else:
-        return redirect('login')
+        return redirect('accounts:login')
