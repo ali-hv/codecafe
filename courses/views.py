@@ -33,7 +33,7 @@ def register_course(request, course_id):
 
 def search_courses(request, keyword):
     keyword = request.GET.get('q')
-    courses = Course.objects.filter(title__contains=keyword)
+    courses = Course.objects.filter(title__contains=keyword, is_published=True)
     context = {'courses': courses}
 
     return render(request, 'courses/index.html', context=context)

@@ -4,7 +4,7 @@ from courses.models import Course
 
 
 def home_page(request):
-    courses = Course.objects.annotate(count=Count('users')).order_by('-count')[:3]
+    courses = Course.objects.annotate(count=Count('users')).filter(is_published=True).order_by('-count')[:3]
     return render(request, 'home/index.html', {'courses': courses})
 
 
