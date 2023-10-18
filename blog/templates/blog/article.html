@@ -9,10 +9,10 @@
             <img class="img-fluid rounded" src="{{ article.image.url }}" alt="عکس مقاله">
         </div>
         <div class="col-md-12 text-center" style="margin-top: 50px;">
-            <h2 style="font-size: 60px;">{{ article.title }}</h2>
+            <h2 style="font-size: 60px;">{{ article.title }}</h2></br>
         </div>
         <div>
-            <p>{{ article.detail }}</p>
+            <p>{{ article.detail|safe }}</p>
         </div>
     </div>
 </div>
