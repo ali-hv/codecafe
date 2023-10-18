@@ -89,7 +89,7 @@
 
     <!-- Additional Course Details -->
     <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-12" style="width: 95%; margin-right: 10px;">
             <h2>توضیحات دوره</h2>
             <p>{{ course.detail }}</p>
         </div>
@@ -98,7 +98,7 @@
     <!-- Course Videos List -->
     <div class="row mt-5">
         <div class="col-md-12">
-            <h2>ویدئو ها</h2>
+            <h2 style="margin-right: 3%;">ویدئو ها</h2></br>
             <ul class="list-group" style="border-radius: 20px;">
                 {% for video in course.videos.all %}
                   <li class="list-group-item d-flex justify-content-between align-items-center">
