@@ -132,8 +132,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'home/static',
-    BASE_DIR / 'blog/static',
-    BASE_DIR / 'courses/static',
     BASE_DIR / 'static'
 )
 

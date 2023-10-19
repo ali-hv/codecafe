@@ -25,12 +25,21 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
+class Chapter(models.Model):
+    title = models.CharField(max_length=100)
+    course = models.ForeignKey("Course", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+
 class Video(models.Model):
     title = models.CharField(max_length=250, blank=False, verbose_name='Video Title')
     video = models.FileField(upload_to='videos/courses/%Y-%m-%d/', verbose_name='Video File')  # TODO add file validator
     uploaded_date = models.DateTimeField(auto_now=True)
     sequence_number = models.PositiveIntegerField()
     duration = models.PositiveIntegerField()
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, default=None)
     course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name="video_course") # Just for easier managing
 
     def __str__(self):

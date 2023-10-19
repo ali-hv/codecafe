@@ -17,7 +17,7 @@ class Author(models.Model):
 
 class Article(TimeStampedModel):
     title = models.CharField(max_length=250, verbose_name='Article Title')
-    slug = models.SlugField(unique=True, max_length=255, allow_unicode=True, default='article-slug')
+    slug = models.SlugField(unique=True, max_length=255, allow_unicode=True)
     detail = models.TextField(verbose_name='Article Detail')
     image = models.ImageField(upload_to='photos/articles/%Y-%m-%d/', verbose_name='Article Detail')
     is_published = models.BooleanField(default=False)
