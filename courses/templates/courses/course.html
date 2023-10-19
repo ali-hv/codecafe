@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% load jalali_tags %}
+{%  load static %}
 
 {% block title %}{{ course.title }}{% endblock title %}
 
@@ -99,20 +100,34 @@
     <div class="row mt-5">
         <div class="col-md-12">
             <h2 style="margin-right: 3%;">ویدئو ها</h2></br>
-            <ul class="list-group" style="border-radius: 20px;">
-                {% for video in course.videos.all %}
-                  <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {% if access%}
-                        <a href="http://127.0.0.1:8000/media/{{ video.video }}">{{ video.title }}</a>
-                        <i class="fa fa-unlock"></i>
-                    {% else %}
-                        <p>{{ video.title }}</p>
-                        <i class="fa fa-lock"></i>
-                    {% endif %}
-                  </li>
+            <div class="course-list" style="float: right; width: 100%;">
+                {% for chapter in course.chapter_set.all %}
+                    <div class="chapter">
+                        <div class="chapter-header">
+                            <h2 class="chapter-title">{{ chapter.title }}</h2>
+                            <span class="dropdown-toggle"></span>
+                        </div>
+                        <ul class="chapter-dropdown">
+                            {% for video in chapter.video_set.all %}
+                                <li>
+                                    {% if access %}
+                                        <a href="{{ video.video.url }}" style="color: #0dcaf0">{{ video.title }}</a>
+                                        <a href="{{ video.video.url }}" style="margin: 10px;">
+                                            <i class="bi bi-download" style="float: left;"></i>
+                                        </a>
+                                    {% else %}
+                                        <a>{{ video.title }}</a>
+                                        <i class="fa fa-lock" style="float: left;"></i>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
+            <script src="{% static 'js/video-list.js' %}"></script>
         </div>
     </div>
 </div>
+
 {% endblock content %}
