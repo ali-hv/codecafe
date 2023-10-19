@@ -2,16 +2,14 @@ from django.contrib import admin
 from .models import Article, Author
 from django.contrib import messages
 from django.utils.translation import ngettext
-from django_summernote.admin import SummernoteModelAdmin
 
 
 @admin.register(Article)
-class ArticleAdmin(SummernoteModelAdmin):
+class ArticleAdmin(admin.ModelAdmin):
     list_display = ["title", "updated_date", "is_published", "author", ]
     list_filter = ["is_published", "category", "updated_date", ]
     ordering = ["updated_date", ]
     actions = ["make_published", ]
-    summernote_fields = ('detail',)
 
     @admin.action(description='Mark selected articles as published')
     def make_published(self, request, queryset):

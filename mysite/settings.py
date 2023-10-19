@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_summernote',
     'widget_tweaks',
     'jalali_date',
     'captcha',
