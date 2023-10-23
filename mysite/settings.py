@@ -163,7 +163,7 @@ else:
 AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
        'IDPAY': {
-           'MERCHANT_CODE': os.environ["IDPAY_MERCHANT_CODE"],
+           'MERCHANT_CODE': IDPAY_MERCHANT_CODE,
            'METHOD': 'POST',  # GET or POST
            'X_SANDBOX': 0,  # 0 disable, 1 active
        }
