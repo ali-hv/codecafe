@@ -40,17 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_summernote',
-    'widget_tweaks',
-    'jalali_date',
     'captcha',
+    'jalali_date',
+    'widget_tweaks',
+    'azbankgateways',
+    'django_summernote',
     
     'home',
     'blog',
     'users',
     'courses',
-    'accounts',
     'payment',
+    'accounts',
 ]
 
 MIDDLEWARE = [
