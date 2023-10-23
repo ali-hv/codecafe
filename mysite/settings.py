@@ -155,12 +155,17 @@ if "RECAPTCHA_PRIVATE_KEY" in os.environ:
     RECAPTCHA_PRIVATE_KEY = os.environ["RECAPTCHA_PRIVATE_KEY"]
 
 # Bank Gateways Configs
+if "IDPAY_MERCHANT_CODE" in os.environ:
+    IDPAY_MERCHANT_CODE = os.environ["IDPAY_MERCHANT_CODE"]
+else:
+    IDPAY_MERCHANT_CODE = ""
+
 AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
        'IDPAY': {
-           'MERCHANT_CODE': '74831835-6f5d-4ff0-83f5-31fd8bd12a59',
+           'MERCHANT_CODE': os.environ["IDPAY_MERCHANT_CODE"],
            'METHOD': 'POST',  # GET or POST
-           'X_SANDBOX': 1,  # 0 disable, 1 active
+           'X_SANDBOX': 0,  # 0 disable, 1 active
        }
    },
    'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
@@ -170,6 +175,6 @@ AZ_IRANIAN_BANK_GATEWAYS = {
    'TRACKING_CODE_LENGTH': 16, # اختیاری
    'SETTING_VALUE_READER_CLASS': 'azbankgateways.readers.DefaultReader', # اختیاری
    'BANK_PRIORITIES': [], # اختیاری
-   'IS_SAFE_GET_GATEWAY_PAYMENT': False, #اختیاری، بهتر است True بزارید.
+   'IS_SAFE_GET_GATEWAY_PAYMENT': True, #اختیاری، بهتر است True بزارید.
    'CUSTOM_APP': None, # اختیاری
 }
