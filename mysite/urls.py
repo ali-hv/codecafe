@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.static import serve
+from azbankgateways.urls import az_bank_gateways_urls
 import os
 
 if 'ADMIN_PANEL_URL' in os.environ:
@@ -18,6 +18,7 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('blog/', include('blog.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('bankgateways/', az_bank_gateways_urls()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
