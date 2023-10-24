@@ -2,17 +2,19 @@ from django.contrib import admin
 from .models import Course, Category, Video, Teacher, Chapter
 from django.contrib import messages
 from django.utils.translation import ngettext
+from django_summernote.admin import SummernoteModelAdmin
 
 
 course_id = None
 
 
 @admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
+class CourseAdmin(SummernoteModelAdmin):
     list_display = ["title", "updated_date", "is_published", "teacher", ]
     list_filter = ["is_published", "category", "updated_date", "status", ]
     ordering = ["updated_date", ]
     actions = ["make_published", "make_done", ]
+    summernote_fields = ('detail',)
 
     @admin.action(description='Mark selected courses as published')
     def make_published(self, request, queryset):
