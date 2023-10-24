@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% load jalali_tags %}
+{% load humanize %}
 {%  load static %}
 
 {% block title %}{{ course.title }}{% endblock title %}
@@ -23,7 +24,7 @@
                         {% if course.price == 0 %}
                             <span class="course-details-price">رایگان</span>
                         {% else %}
-                            <span class="course-details-price">{{ course.price }} تومان </span>
+                            <span class="course-details-price">{{ course.get_final_price|intcomma }} تومان </span>
                         {% endif %}
                     </span>
                 </div>
