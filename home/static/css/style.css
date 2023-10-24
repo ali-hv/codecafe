@@ -643,3 +643,16 @@ input#search-input {
     transform: rotate(-180deg);
 }
 /* end video list */
+
+/* course card */
+.course-card-price {
+    color: white;
+    background-color: #0d6efd;
+    padding: 10px 15px 10px 15px;
+    border-radius: 30px;
+    width: auto;
+    text-align: center;
+    display:table;
+    margin:auto
+}
+/* course card */
