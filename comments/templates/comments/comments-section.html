@@ -1,0 +1,24 @@
+{% load static %}
+
+<script src="{% static 'comments/js/comments-section.js' %}"></script>
+<link rel="stylesheet" href="{% static 'comments/css/comments-section.css' %}">
+<div class="comment-section">
+    <h2>نظرات</h2>
+    <div class="comment">
+        <div class="avatar">
+            <img src="{% static 'img/comments-user-avatar.png' %}" alt="User 1">
+        </div>
+        {% for comment in comments %}
+            <div class="comment-content">
+                <p class="username">{{ user.username }}</p>
+                <p class="text">{{ comment.content }}</p>
+                <p class="comment-datetime">{{ comment.created_date }} &nbsp;| &nbsp;</p>
+                <button class="reply-button">پاسخ</button>
+                <div class="reply-section">
+                    <textarea id="comment" name="comment" rows="4" required style="margin-right: -5px;" class="text-input"></textarea>
+                    <button class="submit-reply">ارسال</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
