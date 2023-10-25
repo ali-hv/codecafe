@@ -1,7 +1,9 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from mysite.models import TimeStampedModel
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator
+from comments.models import Comment
 
 
 class Teacher(models.Model):
@@ -61,6 +63,7 @@ class Course(TimeStampedModel):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teacher')
     videos = models.ManyToManyField(Video, blank=True, related_name="course_videos")
     users = models.ManyToManyField(User, related_name='enrolled_courses', blank=True)
+    comments = GenericRelation(Comment)
 
     def __str__(self):
         return self.title

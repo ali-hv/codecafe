@@ -1,7 +1,9 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from mysite.models import TimeStampedModel
 from django.contrib.auth.models import User
 from courses.models import Category
+from comments.models import Comment
 
 
 class Author(models.Model):
@@ -23,3 +25,4 @@ class Article(TimeStampedModel):
     is_published = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Article Category')
     author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Article Author')
+    comments = GenericRelation(Comment)
