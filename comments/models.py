@@ -13,7 +13,7 @@ class Comment(models.Model):
     content_object = GenericForeignKey()
 
     class Meta:
-        indexes = [models.Index('content_type', 'object_id')]
+        indexes = [models.Index(fields=['content_type', 'object_id'])]
 
 
 class ReplyComment(models.Model):
