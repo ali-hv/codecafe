@@ -13,6 +13,9 @@ class Comment(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
 
+    def __str__(self):
+        return self.content
+
     class Meta:
         indexes = [models.Index(fields=['content_type', 'object_id'])]
 
@@ -22,4 +25,7 @@ class ReplyComment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+
+    def __str__(self):
+        return self.content

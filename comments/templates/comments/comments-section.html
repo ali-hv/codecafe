@@ -1,24 +1,70 @@
 {% load static %}
+{% load jalali_tags %}
+{% load comment_extras %}
+{% load custom_tags %}
 
-<script src="{% static 'comments/js/comments-section.js' %}"></script>
 <link rel="stylesheet" href="{% static 'comments/css/comments-section.css' %}">
+
 <div class="comment-section">
     <h2>نظرات</h2>
-    <div class="comment">
+    {% for comment in comments %}
+        <div class="comment">
         <div class="avatar">
             <img src="{% static 'img/comments-user-avatar.png' %}" alt="User 1">
         </div>
-        {% for comment in comments %}
-            <div class="comment-content">
-                <p class="username">{{ user.username }}</p>
-                <p class="text">{{ comment.content }}</p>
-                <p class="comment-datetime">{{ comment.created_date }} &nbsp;| &nbsp;</p>
-                <button class="reply-button">پاسخ</button>
+        <div class="comment-content">
+            <p class="username">{{ comment.user }}</p>
+            <p class="text">{{ comment.content }}</p>
+            <p class="comment-datetime">{{ comment.created_at|to_jalali:'%Y/%m/%d - %H:%M:%S'|to_persian }} &nbsp;| &nbsp;</p>
+            <button class="reply-button">پاسخ</button>
+            <form method="post" action="{% url 'comments:submit_reply_comment' %}">
+                {% csrf_token %}
                 <div class="reply-section">
-                    <textarea id="comment" name="comment" rows="4" required style="margin-right: -5px;" class="text-input"></textarea>
+                    <textarea id="content" name="content" rows="4" required style="margin-right: -5px;" class="text-input"></textarea>
                     <button class="submit-reply">ارسال</button>
+                    <input type="hidden" name="comment" value="{{ comment.id }}"/>
+                    <input type="hidden" name="user" value="{{ user.id }}"/>
                 </div>
+            </form>
+            {% for reply in comment.replies.all|is_accepted %}
+                <div class="comment">
+                <div class="avatar">
+                    <img src="{% static 'img/comments-user-avatar.png' %}" alt="User 1">
+                </div>
+                <div class="comment-content">
+                    <p class="username">{{ reply.user }}</p>
+                    <p class="text">{{ reply.content }}</p>
+                    <p class="comment-datetime">{{ reply.created_at|to_jalali:'%Y/%m/%d - %H:%M:%S'|to_persian }}</p>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    {% empty %}
+        <br><h5 align="center">اولین نفری باشید که نظری می نویسد !</h5>
+    {% endfor %}
+
+    <br>
+    <div class="comment-form">
+    {% if user.is_authenticated %}
+        <h2>نظر خود را ثبت کنید</h2>
+        <form method="post" action="{% url 'comments:submit_comment' %}">
+            {% csrf_token %}
+            <div class="input-field">
+                <label for="content">نظر شما</label>
+                <textarea id="content" name="content" rows="4" required style="margin-right: -5px;"></textarea>
+                <input type="hidden" name="app_label" value="courses"/>
+                <input type="hidden" name="model" value="course"/>
+                <input type="hidden" name="object_id" value="{{ course.id }}"/>
+                <input type="hidden" name="user" value="{{ user.id }}"/>
             </div>
-        {% endfor %}
+            <button type="submit">ارسال</button>
+        </form>
+    {% else %}
+        <a href="{% url 'accounts:login' %}">برای نظر دادن لطفا وارد حساب کاربری خود شوید</a>
+    {% endif %}
     </div>
+
 </div>
+
+<script src="{% static 'comments/js/comments-section.js' %}"></script>

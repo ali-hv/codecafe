@@ -1,7 +1,8 @@
 {% extends 'home/base.html' %}
 {% load jalali_tags %}
 {% load humanize %}
-{%  load static %}
+{% load static %}
+{% load custom_tags %}
 
 {% block title %}{{ course.title }}{% endblock title %}
 
@@ -43,7 +44,7 @@
                     <span>
                         <!-- Course Duration -->
                         <span class="course-details-info">
-                            {{ course.created_date|to_jalali:'%Y/%m/%d' }}
+                            {{ course.created_date|to_jalali:'%Y/%m/%d'|to_persian }}
                         </span>
                     </span>
                 </div>
@@ -53,7 +54,7 @@
                     <span>
                         <!-- Course Duration -->
                         <span class="course-details-info">
-                            {{ course.updated_date|to_jalali:'%Y/%m/%d' }}
+                            {{ course.updated_date|to_jalali:'%Y/%m/%d'|to_persian }}
                         </span>
                     </span>
                 </div>
@@ -128,7 +129,12 @@
             </div>
             <script src="{% static 'js/video-list.js' %}"></script>
         </div>
-    </div>
+    </div><br><br><br><br>
+
+    <!-- start comment section -->
+    {% include 'comments/comments-section.html' with comments=comments course=course %}
+    <!-- end comment section -->
+
 </div>
 
 {% endblock content %}

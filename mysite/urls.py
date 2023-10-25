@@ -22,6 +22,7 @@ urlpatterns = [
     path('bankgateways/', az_bank_gateways_urls()),
     path('callback-gateway/', callback_gateway_view),
     path('go-to-gateway/', go_to_gateway_view),
+    path('comment', include('comments.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
