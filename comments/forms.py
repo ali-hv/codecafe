@@ -8,7 +8,7 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
 
 
-class ReplyForm(forms.ModelForm):
+class ReplyCommentForm(forms.ModelForm):
     class Meta:
         model = ReplyComment
         fields = ['content']
