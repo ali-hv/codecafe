@@ -45,6 +45,10 @@
     </div>
 
     <div class="form-group">
+        {{ register_form.email|add_class:"form-control"|attr:"placeholder:ایمیل" }}
+    </div>
+
+    <div class="form-group">
     {{ register_form.captcha }}
     </div>
 

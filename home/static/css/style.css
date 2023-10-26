@@ -504,8 +504,7 @@ input#search-input {
 /* END search box */
 
  /* Dropdown Button */
- .dropbtn {
-  background-image: url("../img/user-avatar.png");
+.dropbtn {
   background-size: 60px 60px;
   padding: 16px;
   border: none;

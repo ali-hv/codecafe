@@ -35,7 +35,8 @@
 }
 
 .comment-section .username {
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: larger;
 }
 
 .comment-section .text {

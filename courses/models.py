@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from mysite.models import TimeStampedModel
@@ -7,7 +8,7 @@ from comments.models import Comment
 
 
 class Teacher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     bio = models.TextField(verbose_name="Teacher Bio")
 
     def __str__(self):
@@ -62,7 +63,7 @@ class Course(TimeStampedModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teacher')
     videos = models.ManyToManyField(Video, blank=True, related_name="course_videos")
-    users = models.ManyToManyField(User, related_name='enrolled_courses', blank=True)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='enrolled_courses', blank=True)
     comments = GenericRelation(Comment)
 
     def __str__(self):

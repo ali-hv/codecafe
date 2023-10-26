@@ -4,10 +4,11 @@ from mysite.models import TimeStampedModel
 from django.contrib.auth.models import User
 from courses.models import Category
 from comments.models import Comment
+from django.conf import settings
 
 
 class Author(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     bio = models.TextField(verbose_name="Author Bio")
 
     def __str__(self):

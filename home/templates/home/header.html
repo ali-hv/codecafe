@@ -42,7 +42,11 @@
         <div class="button-group">
             {% if user.is_authenticated %}
               <div class="dropdown">
-                <button class="dropbtn"></button>
+                {% if user.avatar %}
+                    <button class="dropbtn" style="background-image: url({{ user.avatar.url }});"></button>
+                {% else %}
+                    <button class="dropbtn" style="background-image: url({% static 'img/user-avatar.png' %});"></button>
+                {% endif %}
                 <div class="dropdown-content">
                   <a href="{% url 'users:user_profile' %}"><i class="bi bi-person" style="margin-left: 8px"></i>پروفایل</a>
                   <a href="{% url 'users:user_courses' %}"><i class="bi bi-folder2" style="margin-left: 8px"></i>دوره های من</a>

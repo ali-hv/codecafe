@@ -10,10 +10,18 @@
     {% for comment in comments %}
         <div class="comment">
         <div class="avatar">
-            <img src="{% static 'img/comments-user-avatar.png' %}" alt="User Avatar">
+            {% if comment.user.avatar %}
+                <img src="{{ comment.user.avatar.url }}" alt="User Avatar">
+            {% else %}
+                <img src="{% static 'img/user-avatar.png' %}" alt="User Avatar">
+            {% endif %}
         </div>
         <div class="comment-content">
-            <p class="username">{{ comment.user }}</p>
+            {% if comment.user.get_full_name %}
+                <p class="username">{{ comment.user.get_full_name }}</p>
+            {% else %}
+                <p class="username">{{ comment.user }}</p>
+            {% endif %}
             <p class="text">{{ comment.content }}</p>
             <p class="comment-datetime">{{ comment.created_at|to_jalali:'%Y/%m/%d - %H:%M:%S'|to_persian }} &nbsp;| &nbsp;</p>
             <button class="reply-button">پاسخ</button>
@@ -28,10 +36,18 @@
             {% for reply in comment.replies.all|is_accepted %}
                 <div class="comment">
                 <div class="avatar">
-                    <img src="{% static 'img/comments-user-avatar.png' %}" alt="User Avatar">
+                    {% if reply.user.avatar %}
+                        <img src="{{ reply.user.avatar.url }}" alt="User Avatar">
+                    {% else %}
+                        <img src="{% static 'img/user-avatar.png' %}" alt="User Avatar">
+                    {% endif %}
                 </div>
                 <div class="comment-content">
-                    <p class="username">{{ reply.user }}</p>
+                    {% if reply.user.get_full_name %}
+                        <p class="username">{{ reply.user.get_full_name }}</p>
+                    {% else %}
+                        <p class="username">{{ reply.user }}</p>
+                    {% endif %}
                     <p class="text">{{ reply.content }}</p>
                     <p class="comment-datetime">{{ reply.created_at|to_jalali:'%Y/%m/%d - %H:%M:%S'|to_persian }}</p>
                 </div>
