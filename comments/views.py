@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from .models import Comment, ReplyComment
 from django.shortcuts import redirect, get_object_or_404
@@ -26,6 +27,8 @@ def submit_comment(request):
     content_type_id = get_object_or_404(ContentType, app_label=app_label, model=model).id
     comment = Comment(user_id=user_id, content=content, content_type_id=content_type_id, object_id=object_id)
     comment.save()
+
+    messages.success(request, 'نظر شما ارسال شد و پس از بررسی منتشر می شود')
     return redirect(request.META.get('HTTP_REFERER'))
 
 
@@ -36,4 +39,6 @@ def submit_reply_comment(request):
     comment_id = data['comment'][0]
     reply = ReplyComment(user_id=user_id, content=content, comment_id=comment_id)
     reply.save()
+
+    messages.success(request, 'نظر شما ارسال شد و پس از بررسی منتشر می شود')
     return redirect(request.META.get('HTTP_REFERER'))
