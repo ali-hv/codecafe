@@ -7,7 +7,7 @@ from django.db import models
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
@@ -23,7 +23,7 @@ class Comment(models.Model):
 
 class ReplyComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     accepted = models.BooleanField(default=False)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')

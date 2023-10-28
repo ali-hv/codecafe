@@ -10,6 +10,7 @@ from blog.models import Article
 def submit_comment(request):
     referer = request.META.get('HTTP_REFERER')
     slug = unquote(referer.split('/')[4])
+
     if '/courses/' in referer:
         app_label = 'courses'
         model = 'course'
@@ -24,6 +25,11 @@ def submit_comment(request):
     data = dict(**request.POST)
     user_id = request.user.id
     content = data['content'][0]
+
+    if len(content) > 250:
+        messages.success(request, 'متن شما نباید بیشتر از 250 کاراکتر باشد')
+        return redirect(request.META.get('HTTP_REFERER'))
+
     content_type_id = get_object_or_404(ContentType, app_label=app_label, model=model).id
     comment = Comment(user_id=user_id, content=content, content_type_id=content_type_id, object_id=object_id)
     comment.save()
@@ -36,6 +42,11 @@ def submit_reply_comment(request):
     data = dict(**request.POST)
     user_id = request.user.id
     content = data['content'][0]
+
+    if len(content) > 250:
+        messages.success(request, 'متن شما نباید بیشتر از 250 کاراکتر باشد')
+        return redirect(request.META.get('HTTP_REFERER'))
+
     comment_id = data['comment'][0]
     reply = ReplyComment(user_id=user_id, content=content, comment_id=comment_id)
     reply.save()
