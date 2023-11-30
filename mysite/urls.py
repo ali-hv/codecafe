@@ -18,6 +18,7 @@ urlpatterns = [
     path('courses/', include('courses.urls')),
     path('user/', include('users.urls')),
     path('blog/', include('blog.urls')),
+    path('cart/', include('cart.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('bankgateways/', az_bank_gateways_urls()),
     path('callback-gateway/', callback_gateway_view),
