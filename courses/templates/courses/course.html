@@ -83,6 +83,8 @@
                 <!-- Register Course Button -->
                 {% if user in course.users.all %}
                     <button class="btn btn-primary btn-lg btn-block" style="width: 100%">شما به این دوره دسترسی دارید</button>
+                {% elif course in user.user_cart.courses.all %}
+                    <a class="btn btn-primary btn-lg btn-block" style="width: 100%">به سبد خرید اضافه شده است</a>
                 {% elif course.price != 0 %}
                     <a href="{% url 'cart:add_to_cart' course.id %}" class="btn btn-primary btn-lg btn-block" style="width: 100%">افزودن به سبد خرید</a>
                 {% else %}
