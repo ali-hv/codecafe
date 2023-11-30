@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dotenv
 import os
+
+dotenv.load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -153,24 +156,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Google Recaptcha Configs
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
-if "RECAPTCHA_PUBLIC_KEY" in os.environ:
-    RECAPTCHA_PUBLIC_KEY = os.environ["RECAPTCHA_PUBLIC_KEY"]
-
-if "RECAPTCHA_PRIVATE_KEY" in os.environ:
-    RECAPTCHA_PRIVATE_KEY = os.environ["RECAPTCHA_PRIVATE_KEY"]
+RECAPTCHA_PUBLIC_KEY = os.getenv("RECAPTCHA_PUBLIC_KEY", "")
+RECAPTCHA_PRIVATE_KEY = os.getenv("RECAPTCHA_PRIVATE_KEY", "")
 
 # Bank Gateways Configs
-if "IDPAY_MERCHANT_CODE" in os.environ:
-    IDPAY_MERCHANT_CODE = os.environ["IDPAY_MERCHANT_CODE"]
-else:
-    IDPAY_MERCHANT_CODE = ""
+IDPAY_MERCHANT_CODE = os.environ["IDPAY_MERCHANT_CODE"]
 
 AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
        'IDPAY': {
            'MERCHANT_CODE': IDPAY_MERCHANT_CODE,
            'METHOD': 'POST',  # GET or POST
-           'X_SANDBOX': 0,  # 0 disable, 1 active
+           'X_SANDBOX': 1,  # 0 disable, 1 active
        }
    },
    'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
