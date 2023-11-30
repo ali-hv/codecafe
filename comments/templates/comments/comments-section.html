@@ -32,7 +32,7 @@
             {% endif %}
             <p class="text">{{ comment.content }}</p>
             <p class="comment-datetime">{{ comment.created_at|to_jalali:'%Y/%m/%d - %H:%M:%S'|to_persian }} &nbsp;| &nbsp;</p>
-        
+
             {% if user.is_authenticated %}
                 <button class="reply-button">پاسخ</button>
             {% endif %}
