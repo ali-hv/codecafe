@@ -9,7 +9,7 @@ class CartCourse(models.Model):
 
 class UserCart(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    courses = models.ForeignKey(CartCourse, on_delete=models.CASCADE)
+    courses = models.ForeignKey(CartCourse, on_delete=models.CASCADE, blank=True, )
 
     def get_payable_amount(self):
         amount = 0
