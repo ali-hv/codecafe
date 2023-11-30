@@ -32,7 +32,11 @@
             {% endif %}
             <p class="text">{{ comment.content }}</p>
             <p class="comment-datetime">{{ comment.created_at|to_jalali:'%Y/%m/%d - %H:%M:%S'|to_persian }} &nbsp;| &nbsp;</p>
-            <button class="reply-button">پاسخ</button>
+        
+            {% if user.is_authenticated %}
+                <button class="reply-button">پاسخ</button>
+            {% endif %}
+
             <form method="post" action="{% url 'comments:submit_reply_comment' %}">
                 {% csrf_token %}
                 <div class="reply-section">
