@@ -1,19 +1,16 @@
+from django.conf import settings
 from django.db import models
-from accounts.models import CustomUser
+
 from courses.models import Course
 
 
-class CartCourse(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-
-
 class UserCart(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    courses = models.ForeignKey(CartCourse, on_delete=models.CASCADE, blank=True, )
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_cart")
+    courses = models.ManyToManyField(Course, blank=True, related_name="cart_courses")
 
     def get_payable_amount(self):
         amount = 0
         for cart_course in self.courses.all():
-            amount += cart_course.course.price
+            amount += cart_course.price
 
         return amount
