@@ -1,4 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+
+from cart.models import UserCart
 from .models import Course
 
 
@@ -35,3 +38,12 @@ def search_courses(request, keyword):
     context = {'courses': courses}
 
     return render(request, 'courses/index.html', context=context)
+
+
+@login_required
+def add_to_cart(request, course_id):
+    user_cart = get_object_or_404(UserCart, user=request.user)
+    course = get_object_or_404(Course, id=course_id)
+    user_cart.courses.add(course)
+
+    return redirect('courses:course_detail', course_slug=course.slug)
