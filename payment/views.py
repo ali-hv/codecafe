@@ -1,16 +1,18 @@
 import logging
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
 from azbankgateways.exceptions import AZBankGatewaysException
 from django.http import HttpResponse, Http404
 from django.urls import reverse
 
+from cart.models import UserCart
+
 
 def go_to_gateway_view(request):
-    # خواندن مبلغ از هر جایی که مد نظر است
-    amount = 50000
-    # تنظیم شماره موبایل کاربر از هر جایی که مد نظر است
-    user_mobile_number = '+989112221234'  # اختیاری
+    amount = get_object_or_404(UserCart, user=request.user).get_payable_amount()
+    amount *= 10  # convert the amount from RIAL to TOMAN
+
+    user_mobile_number = '+989112221234'
 
     factory = bankfactories.BankFactory()
     try:
