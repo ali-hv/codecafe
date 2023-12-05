@@ -7,11 +7,21 @@
   overflow: hidden;
 }
 
+@media only screen and (max-width: 820px) {
+  .cart-container {
+    margin: 20px;
+  }
+}
+
 .cart-header {
   background-color: #333;
   color: #fff;
   padding: 15px;
   text-align: center;
+}
+
+h1 {
+  color: #fff;
 }
 
 .cart-items {
@@ -36,13 +46,17 @@
   color: #333;
 }
 
+.item-name:hover {
+  color: #2e78e5;
+}
+
 .item-price {
   color: #888;
 }
 
 .item-quantity {
   font-size: 14px;
-  color: #555;
+  color: #888;
 }
 
 .cart-total {
@@ -77,4 +91,36 @@
 
 .checkout-button:hover {
   background-color: #218c53;
+  color: #fff;
 }
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #e74c3c; /* Red color */
+  cursor: pointer;
+  font-size: 18px;
+  position: relative; /* Required for absolute positioning of label */
+  transition: transform 0.5s ease; /* Adjust the duration for slower transition */
+}
+
+.delete-label {
+  position: absolute;
+  margin-left: 45px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.5s ease; /* Adjust the duration for slower label fade-in */
+}
+
+.delete-button:hover .delete-label {
+  opacity: 1; /* Show label on hover */
+}
+
+.delete-button:hover {
+  text-decoration: underline;
+  transform: scale(1.2); /* Scale the button on hover */
+}
+
+

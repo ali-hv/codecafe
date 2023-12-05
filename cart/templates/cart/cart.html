@@ -1,30 +1,38 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}سبد خرید{% endblock %}
 
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'cart/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8iN17V6Lk2t65wku8KvkJF5DUVJ+clhjll65KqL5qEARL9ILC2G5voEKbw" crossorigin="anonymous">
 
 <div class="cart-container">
     <div class="cart-header">
       <h1>سبد خرید شما</h1>
     </div>
-    {% for course in cart.courses %}
+    {% for course in cart.courses.all %}
         <div class="cart-items">
           <div class="cart-item">
             <div class="item-details">
-              <div class="item-name">{{ course.title }}</div>
-              <div class="item-quantity">تعداد: 1</div>
+              <a href="{% url 'courses:course_detail' course.slug %}" target="_blank">
+                  <div class="item-name">{{ course.title }}</div>
+              </a>
+              <div class="item-quantity">{{ course.get_final_price|intcomma }} هزار تومان</div>
             </div>
-            <div class="item-price">{{ course.get_final_price }}</div>
+{#            <div class="item-price">{{ course.get_final_price|intcomma }} هزار تومان</div>#}
+            <button class="delete-button">
+              <i class="fas fa-trash-alt"></i>
+              <span class="delete-label">مطمئنی؟</span>
+            </button>
           </div>
         </div>
     {% endfor %}
     <div class="cart-total">
       <div class="total-label">مجموع:</div>
-      <div class="total-amount">{{ cart.get_payable_amount }} هزار تومان</div>
+      <div class="total-amount">{{ cart.get_payable_amount|intcomma }} هزار تومان</div>
     </div>
     <a href="#" class="checkout-button">پرداخت</a>
 </div>
