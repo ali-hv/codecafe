@@ -123,4 +123,8 @@ h1 {
   transform: scale(1.2); /* Scale the button on hover */
 }
 
-
+.empty-message, .temp-empty-message {
+  text-align: center;
+  font-size: 30px;
+  margin: 50px;
+}
