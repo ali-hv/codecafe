@@ -1,0 +1,32 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}سبد خرید{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'cart/style.css' %}">
+
+<div class="cart-container">
+    <div class="cart-header">
+      <h1>سبد خرید شما</h1>
+    </div>
+    {% for course in cart.courses %}
+        <div class="cart-items">
+          <div class="cart-item">
+            <div class="item-details">
+              <div class="item-name">{{ course.title }}</div>
+              <div class="item-quantity">تعداد: 1</div>
+            </div>
+            <div class="item-price">{{ course.get_final_price }}</div>
+          </div>
+        </div>
+    {% endfor %}
+    <div class="cart-total">
+      <div class="total-label">مجموع:</div>
+      <div class="total-amount">{{ cart.get_payable_amount }} هزار تومان</div>
+    </div>
+    <a href="#" class="checkout-button">پرداخت</a>
+</div>
+
+{% endblock content %}
