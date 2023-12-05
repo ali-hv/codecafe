@@ -6,7 +6,8 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'cart/style.css' %}">
+<link rel="stylesheet" href="{% static 'cart/css/style.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-GLhlTQ8iN17V6Lk2t65wku8KvkJF5DUVJ+clhjll65KqL5qEARL9ILC2G5voEKbw" crossorigin="anonymous">
 
 <div class="cart-container">
@@ -14,7 +15,7 @@
       <h1>سبد خرید شما</h1>
     </div>
     {% for course in cart.courses.all %}
-        <div class="cart-items">
+        <div class="cart-items" id="course-{{ course.id }}">
           <div class="cart-item">
             <div class="item-details">
               <a href="{% url 'courses:course_detail' course.slug %}" target="_blank">
@@ -22,18 +23,29 @@
               </a>
               <div class="item-quantity">{{ course.get_final_price|intcomma }} هزار تومان</div>
             </div>
-            <button class="delete-button">
+
+            <button class="delete-button" id="csrf-token" data-course-id="{{ course.id }}">
+              {% csrf_token %}
               <i class="fas fa-trash-alt"></i>
               <span class="delete-label">مطمئنی؟</span>
             </button>
           </div>
         </div>
     {% endfor %}
-    <div class="cart-total">
-      <div class="total-label">مجموع:</div>
-      <div class="total-amount">{{ cart.get_payable_amount|intcomma }} هزار تومان</div>
-    </div>
-    <a href="#" class="checkout-button">پرداخت</a>
+
+    {% if cart.courses.all %}
+        <div class="cart-total">
+          <div class="total-label">مجموع:</div>
+          <div class="total-amount">{{ cart.get_payable_amount|intcomma }} هزار تومان</div>
+        </div>
+        <a href="{% url 'cart:pay' %}" class="checkout-button">پرداخت</a>
+    {% else %}
+        <div class="empty-message">سبد خرید شما خالی است !</div>
+    {% endif %}
+
+    <div class="temp-empty-message" style="display: none;">سبد خرید شما خالی است !</div>
 </div>
+
+<script src="{% static 'cart/js/remove-course-from-cart.js' %}"></script>
 
 {% endblock content %}
