@@ -88,7 +88,7 @@
                 {% elif course.price != 0 %}
                     <a href="{% url 'cart:add_to_cart' course.id %}" class="btn btn-primary btn-lg btn-block" style="width: 100%">افزودن به سبد خرید</a>
                 {% else %}
-                    <a href="{% url 'courses:register_course' course.id %}" class="btn btn-primary btn-lg btn-block" style="width: 100%">ثبت نام</a>
+                    <a href="{% url 'courses:register_free_course' course.id %}" class="btn btn-primary btn-lg btn-block" style="width: 100%">ثبت نام</a>
                 {% endif %}
             </div>
         </div>
