@@ -14,3 +14,9 @@ class UserCart(models.Model):
             amount += cart_course.price
 
         return amount
+
+
+class TemporaryOrder(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_temporary_order")
+    tracking_code = models.CharField(max_length=16)
+    courses = models.ManyToManyField(Course, blank=True, related_name="temporary_order_courses")
