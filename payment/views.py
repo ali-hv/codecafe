@@ -1,16 +1,17 @@
 import logging
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from azbankgateways import bankfactories, models as bank_models, default_settings as settings
 from azbankgateways.exceptions import AZBankGatewaysException
 from django.http import HttpResponse, Http404
 from django.urls import reverse
 
-from cart.models import UserCart
+from courses.views import register_items, delete_failed_temporary_order
+from cart.models import UserCart, TemporaryOrder
 
 
 def go_to_gateway_view(request):
-    amount = get_object_or_404(UserCart, user=request.user).get_payable_amount()
-    amount *= 10  # convert the amount from RIAL to TOMAN
+    user_cart = get_object_or_404(UserCart, user=request.user)
+    amount = user_cart.get_payable_amount() * 10  # convert the amount from RIAL to TOMAN
 
     user_mobile_number = '+989112221234'
 
@@ -23,9 +24,12 @@ def go_to_gateway_view(request):
         bank.set_client_callback_url('/callback-gateway/')
         bank.set_mobile_number(user_mobile_number)  # اختیاری
 
-        # در صورت تمایل اتصال این رکورد به رکورد فاکتور یا هر چیزی که بعدا بتوانید ارتباط بین محصول یا خدمات را با این
-        # پرداخت برقرار کنید.
         bank_record = bank.ready()
+
+        temp_order = TemporaryOrder.objects.create(user=request.user,
+                                                   tracking_code=bank_record.tracking_code)
+        temp_order.courses.set(user_cart.courses.all())
+        temp_order.save()
 
         # هدایت کاربر به درگاه بانک
         context = bank.get_gateway()
@@ -49,9 +53,10 @@ def callback_gateway_view(request):
 
     # در این قسمت باید از طریق داده هایی که در بانک رکورد وجود دارد، رکورد متناظر یا هر اقدام مقتضی دیگر را انجام دهیم
     if bank_record.is_success:
-        # پرداخت با موفقیت انجام پذیرفته است و بانک تایید کرده است.
-        # می توانید کاربر را به صفحه نتیجه هدایت کنید یا نتیجه را نمایش دهید.
-        return HttpResponse("پرداخت با موفقیت انجام شد.")
+        register_items(request, tracking_code)
+        return redirect('users:user_courses')
+
+    delete_failed_temporary_order(tracking_code)
 
     # پرداخت موفق نبوده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.
     return HttpResponse("پرداخت با شکست مواجه شده است. اگر پول کم شده است ظرف مدت ۴۸ ساعت پول به حساب شما بازخواهد گشت.")
