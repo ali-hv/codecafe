@@ -166,14 +166,13 @@ IDPAY_MERCHANT_CODE = os.getenv("IDPAY_MERCHANT_CODE", "")
 
 AZ_IRANIAN_BANK_GATEWAYS = {
    'GATEWAYS': {
-       'IDPAY': {
-           'MERCHANT_CODE': IDPAY_MERCHANT_CODE,
-           'METHOD': 'POST',  # GET or POST
-           'X_SANDBOX': 1,  # 0 disable, 1 active
-       }
+       "ZARINPAL": {
+            "MERCHANT_CODE": "<YOUR MERCHANT CODE>",
+            "SANDBOX": 1,  # 0 disable, 1 active
+        },
    },
    'IS_SAMPLE_FORM_ENABLE': True, # اختیاری و پیش فرض غیر فعال است
-   'DEFAULT': 'IDPAY',
+   'DEFAULT': 'ZARINPAL',
    'CURRENCY': 'IRR', # اختیاری
    'TRACKING_CODE_QUERY_PARAM': 'tc', # اختیاری
    'TRACKING_CODE_LENGTH': 16, # اختیاری
